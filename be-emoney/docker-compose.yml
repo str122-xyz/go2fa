@@ -7,7 +7,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root123
-      MYSQL_DATABASE: emoney_db
+      MYSQL_DATABASE: emoney
       MYSQL_USER: emoney_user
       MYSQL_PASSWORD: password123
     ports:
@@ -24,6 +24,6 @@ services:
     environment:
       PMA_HOST: mysql
       MYSQL_ROOT_PASSWORD: root123
-      
+
 volumes:
   mysql_data:

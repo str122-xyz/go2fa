@@ -1,4 +1,20 @@
+# Environment & secrets
 .env
 firebase_service_account.json
-*.DS_Store
+*.key
+*.pem
+ 
+# OS files
+.DS_Store
 __MACOSX/
+Thumbs.db
+ 
+# Go build artifacts
+be-emoney/tmp/
+be-emoney/*.exe
+be-emoney/vendor/
+ 
+# IDE
+.vscode/
+.idea/
+*.swp

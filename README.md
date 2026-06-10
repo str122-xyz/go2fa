@@ -13,8 +13,8 @@ Repository ini merupakan blueprint pembelajaran implementasi **Two-Factor Authen
 
 | Fase | Deskripsi | Status |
 |------|-----------|--------|
-| **Fase 1** | Memahami Flow Backend + Testing via Postman | 🔄 In Progress |
-| **Fase 2** | Implementasi ke Flutter Mobile App | ⏳ Pending |
+| **Fase 1** | Memahami Flow Backend + Testing via Postman | ✅ Completed |
+| **Fase 2** | Implementasi ke Flutter Mobile App | 🔄 In Progress |
 
 ---
 
@@ -195,6 +195,7 @@ Server berjalan di `http://localhost:8080`
 - [Panduan Setup Lengkap](docs/setup.md)
 - [API Reference](docs/api-reference.md)
 - [Konsep 2FA & Perbandingan Metode](docs/setup.md#konsep-2fa)
+- [Screenshot Testing Endpoint via Postman](docs/testing-results)
 
 ---
 

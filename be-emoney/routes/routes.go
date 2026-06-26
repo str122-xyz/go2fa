@@ -1,12 +1,15 @@
 package routes
 
 import (
+	"time"
+
 	"emoney-2fa/config"
 	"emoney-2fa/handlers"
 	"emoney-2fa/middleware"
 	"emoney-2fa/services"
 
 	firebase "firebase.google.com/go/v4"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
@@ -14,6 +17,18 @@ import (
 
 func Setup(db *gorm.DB, rdb *redis.Client, firebaseApp *firebase.App, cfg *config.Config) *gin.Engine {
 	r := gin.Default()
+
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:*"},
+		AllowOriginFunc: func(origin string) bool {
+			return true // dev only — izinkan semua origin sementara testing
+		},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
 
 	jwtSvc := services.NewJWTService(cfg)
 	emailSvc := services.NewEmailService(cfg)

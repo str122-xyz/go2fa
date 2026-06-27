@@ -34,7 +34,7 @@ func Setup(db *gorm.DB, rdb *redis.Client, firebaseApp *firebase.App, cfg *confi
 	emailSvc := services.NewEmailService(cfg)
 	otpSvc := services.NewOTPService(db, rdb, firebaseApp, cfg, emailSvc)
 
-	authHandler := handlers.NewAuthHandler(db, firebaseApp, jwtSvc)
+	authHandler := handlers.NewAuthHandler(db, firebaseApp, jwtSvc, otpSvc)
 	otpHandler := handlers.NewOTPHandler(db, otpSvc)
 	paymentHandler := handlers.NewPaymentHandler(db, otpSvc)
 
@@ -45,12 +45,14 @@ func Setup(db *gorm.DB, rdb *redis.Client, firebaseApp *firebase.App, cfg *confi
 		auth := v1.Group("/auth")
 		{
 			auth.POST("/verify-token", authHandler.VerifyToken)
+			auth.POST("/register", authHandler.Register)
 
 			authRequired := auth.Group("")
 			authRequired.Use(middleware.AuthMiddleware(jwtSvc))
 			{
 				authRequired.GET("/me", authHandler.Me)
 				authRequired.PUT("/fcm-token", authHandler.UpdateFCMToken)
+				authRequired.POST("/verify-email-otp", authHandler.VerifyEmailOTP)
 			}
 		}
 

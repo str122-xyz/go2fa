@@ -14,16 +14,4 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin-emoney
-    restart: always
-    ports:
-      - "8081:80"
-    environment:
-      PMA_HOST: mysql
-      MYSQL_ROOT_PASSWORD: root123
-
-volumes:
-  mysql_data:
+      
